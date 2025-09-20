@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.pinimg.com/474x/fb/db/2b/fbdb2bac3ba973d3dcd35eac9cf74149.jpg">
+    <title>Interactive Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <style>
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            mix-blend-mode: screen;
+            z-index: 9999;
+        }
+        .project-card:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .text-gradient {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <div id="vanta-bg"></div>
+    <div id="cursor-trail"></div>
+
+    <!-- Floating Particles -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-blue-500 rounded-full opacity-50 floating" style="animation-delay: 0s;"></div>
+        <div class="absolute top-1/3 right-1/3 w-6 h-6 bg-purple-500 rounded-full opacity-50 floating" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-5 h-5 bg-pink-500 rounded-full opacity-50 floating" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-3 h-3 bg-indigo-500 rounded-full opacity-50 floating" style="animation-delay: 3s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-80 backdrop-blur-md">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gradient">PORTFOLIO</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-blue-400 transition-all duration-300 transform hover:scale-110">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-all duration-300 transform hover:scale-110">About</a>
+                <a href="#projects" class="hover:text-pink-400 transition-all duration-300 transform hover:scale-110">Projects</a>
+                <a href="#contact" class="hover:text-indigo-400 transition-all duration-300 transform hover:scale-110">Contact</a>
+            </div>
+            <button class="md:hidden focus:outline-none" id="menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+        <div class="md:hidden hidden bg-gray-800 bg-opacity-90" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">About</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+  <div class="text-center z-10 px-6 max-w-4xl" data-aos="fade-up">
+    <h1 class="text-5xl md:text-7xl font-bold mb-6 text-gradient text-center">
+      Roopraj portfolio!!! <span class="animate-pulse">DEVELOPER</span>
+    </h1>
+    <p class="text-xl md:text-2xl mb-8">
+      Crafting immersive digital experiences with cutting-edge interactivity I like web developemnt , web designing a lot and i have created a few projects as well to show my creativity skills hope so you like my creations 😊😊
+    </p>
+  </div>
+</section>
+    </div>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 flex justify-center">
+            <a href="#about" class="animate-bounce">
+                <i data-feather="chevron-down" class="w-10 h-10"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-800 bg-opacity-50 backdrop-blur-lg relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-16 text-center text-gradient" data-aos="fade-up">ABOUT ME</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-10 md:mb-0 flex justify-center" data-aos="fade-right">
+                    <div class="relative">
+                        <img src="https://imgs.search.brave.com/pbj6Q0QACXBJSdMNbIJbSTIinlWyP0X67hrdtKU-ViQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTU1/Mjg3NTU2NS9waG90/by9wcm9ncmFtbWlu/Zy1jb2RpbmctYW5k/LW1hbi13aXRoLWZv/Y3VzLWhvbG9ncmFt/LWFuZC10cmFkaW5n/LXdpdGgtY3liZXIt/c2VjdXJpdHktZnV0/dXJpc3RpYy1hbmQu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PTdtRW83RzdOTl9J/dTRITm5FTzNlNjhO/RS04eEVaTGFJSFI3/Zk1aTDRSeUU9" alt="Profile" class="rounded-full w-64 h-64 object-cover border-4 border-white shadow-xl hover:shadow-2xl transition-all duration-500">
+                        <div class="absolute -bottom-5 -right-5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full p-4 shadow-lg">
+                            <i data-feather="code" class="w-8 h-8"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-2/3 md:pl-16" data-aos="fade-left">
+                    <h3 class="text-2xl font-bold mb-4">Interactive Web Developer</h3>
+                    <p class="mb-6 text-lg leading-relaxed">
+                        I specialize in creating highly interactive and immersive web experiences that push the boundaries of what's possible in the browser. With expertise in modern JavaScript , HTML, CSS , Python and SQL I bring interfaces to life with fluid animations and engaging interactions.
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-gray-700 bg-opacity-50 p-4 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+                            <i data-feather="cpu" class="w-8 h-8 mb-2 text-blue-400"></i>
+                            <h4 class="font-bold">HTML</h4>
+                        </div>
+                        <div class="bg-gray-700 bg-opacity-50 p-4 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+                            <i data-feather="activity" class="w-8 h-8 mb-2 text-purple-400"></i>
+                            <h4 class="font-bold">CSS</h4>
+                        </div>
+                        <div class="bg-gray-700 bg-opacity-50 p-4 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+                            <i data-feather="code" class="w-8 h-8 mb-2 text-pink-400"></i>
+                            <h4 class="font-bold">Javascript</h4>
+                        </div>
+                        <div class="bg-gray-700 bg-opacity-50 p-4 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+                            <i data-feather="wind" class="w-8 h-8 mb-2 text-indigo-400"></i>
+                            <h4 class="font-bold">Python</h4>
+                        </div>
+                        <div class="bg-gray-700 bg-opacity-50 p-4 rounded-lg hover:bg-opacity-70 transition-all duration-300">
+                            <i data-feather="zap" class="w-8 h-8 mb-2 text-blue-400"></i>
+                            <h4 class="font-bold">SQL</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-16 text-center text-gradient" data-aos="fade-up">MY PROJECTS</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card bg-gray-800 bg-opacity-50 rounded-xl p-6 transition-all duration-500 hover:bg-opacity-70" data-aos="flip-left">
+                    <div class="relative overflow-hidden rounded-lg mb-4 h-48">
+                        <img src="https://imgs.search.brave.com/qve_d7AxSJMUcHV-Ei8alZH2SF8hx10WKEg2oEy0C4M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE4/NjY5MDY3Ny9waG90/by9zZWFyY2hpbmct/YnJvd3NpbmctaW50/ZXJuZXQtZGF0YS1p/bmZvcm1hdGlvbi53/ZWJwP2E9MSZiPTEm/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9M0Vu/RFJ2dDVqdjRoTXp1/OU50TXRvU3NUa3A0/anR1SU1FUFU4YXVo/SXowWT0" alt="Project 1" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-xl font-bold">Browsing stuff</h3>
+                        </div>
+                    </div>
+                    <p class="mb-4">This is a type of browser which i created using HTML , CSS and Javascript and took a little bit help of AI and other websites for designing</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">HTML</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">CSS</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">Javascript</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <a href="https://roop3005.github.io/Roopraj-website/" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="w-4 h-4 mr-1"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/Roop3005/Roopraj-website" class="text-purple-400 hover:text-purple-300 flex items-center">
+                            <i data-feather="github" class="w-4 h-4 mr-1"></i> Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card bg-gray-800 bg-opacity-50 rounded-xl p-6 transition-all duration-500 hover:bg-opacity-70" data-aos="flip-left" data-aos-delay="100">
+                    <div class="relative overflow-hidden rounded-lg mb-4 h-48">
+                        <img src="https://imgs.search.brave.com/Koe6qrBOPU8aQvHM0_MWNirb6ePPaOX783HOoMLWT48/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS12ZWN0/b3IvcGljdHVyZS1j/bG91ZHMtd2VhdGhl/ci13aXRoLXdvcmRz/LXdlYXRoZXItd2Vh/dGhlcl8yNDg2Mjct/MzczOC5qcGc_c2Vt/dD1haXNfaW5jb21p/bmcmdz03NDAmcT04/MA" alt="Project 2" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-xl font-bold">Weather</h3>
+                        </div>
+                    </div>
+                    <p class="mb-4">This is an interactive project which gives information of weather across any city in this planet and I created this using my notes and for designing I took a little bit help of AI and other websites.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">HTML</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">CSS</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">Javascript</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <a href="https://roop3005.github.io/Weather/" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="w-4 h-4 mr-1"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/Roop3005/Weather" class="text-purple-400 hover:text-purple-300 flex items-center">
+                            <i data-feather="github" class="w-4 h-4 mr-1"></i> Code
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card bg-gray-800 bg-opacity-50 rounded-xl p-6 transition-all duration-500 hover:bg-opacity-70" data-aos="flip-left" data-aos-delay="200">
+                    <div class="relative overflow-hidden rounded-lg mb-4 h-48">
+                        <img src="https://imgs.search.brave.com/JLte8-jfnH-iB4KsRLIBYflvaZxv7LVeXGDDIh_nqrA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzI0LzA3LzEx/LzM2MF9GXzUyNDA3/MTE3MV9iVFNLdlZB/N0tKY1BUM21mYW5V/YXNqc2Q4YUMwREhH/UC5qcGc" alt="Project 3" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <h3 class="text-xl font-bold">Recipe website</h3>
+                        </div>
+                    </div>
+                    <p class="mb-4">It is an interactive project which i created using notes and to get auto suggestion and to make it more beautiful i took help of AI and other websites.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-900 bg-opacity-50 rounded-full text-sm">HTML</span>
+                        <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">CSS</span>
+                        <span class="px-3 py-1 bg-pink-900 bg-opacity-50 rounded-full text-sm">Javascript</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <a href="https://roop3005.github.io/Recipe/" class="text-blue-400 hover:text-blue-300 flex items-center">
+                            <i data-feather="external-link" class="w-4 h-4 mr-1"></i> Live Demo
+                        </a>
+                        <a href="https://github.com/Roop3005/Recipe" class="text-purple-400 hover:text-purple-300 flex items-center">
+                            <i data-feather="github" class="w-4 h-4 mr-1"></i> Code
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800 bg-opacity-50 backdrop-blur-lg relative overflow-hidden">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-16 text-center text-gradient" data-aos="fade-up">GET IN TOUCH</h2>
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0" data-aos="fade-right">
+                    <h3 class="text-2xl font-bold mb-6">Let's Create Something Amazing</h3>
+                    <p class="mb-8 text-lg leading-relaxed">
+                        Have a project in mind or want to discuss potential opportunities? I'm always excited to hear about new ideas and collaborate on innovative digital experiences.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i data-feather="mail" class="w-6 h-6 mr-4 text-blue-400"></i>
+                            <span>bhattacharjeeroopraj@gmail.com</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="phone" class="w-6 h-6 mr-4 text-purple-400"></i>
+                            <span>+91 9864765304</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i data-feather="map-pin" class="w-6 h-6 mr-4 text-pink-400"></i>
+                            <span>New Delhi, India</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex space-x-4">
+                        <a href="https://github.com/Roop3005" class="w-10 h-10 bg-gray-700 bg-opacity-50 rounded-full flex items-center justify-center hover:bg-purple-500 transition-all duration-300">
+                            <i data-feather="github" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://www.instagram.com/roopraj3005/" class="w-10 h-10 bg-gray-700 bg-opacity-50 rounded-full flex items-center justify-center hover:bg-pink-500 transition-all duration-300">
+                            <i data-feather="instagram" class="w-5 h-5"></i>
+                        </a>
+                        <a href="www.linkedin.com/in/roopraj-bhattacharjee-9a629237b" class="w-10 h-10 bg-gray-700 bg-opacity-50 rounded-full flex items-center justify-center hover:bg-blue-600 transition-all duration-300">
+                            <i data-feather="linkedin" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-16" data-aos="fade-left">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block mb-2">Name</label>
+                                <input type="text" id="name" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2">Email</label>
+                                <input type="email" id="email" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-300">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-500 transition-all duration-300">
+                        </div>
+                        <div>
+                            <label for="message" class="block mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-300"></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-bold hover:from-purple-600 hover:to-pink-600 transition-all duration-500 transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 bg-opacity-90">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center mb-6">
+                <a href="#home" class="text-2xl font-bold text-gradient">PORTFOLIO</a>
+            </div>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#home" class="hover:text-blue-400 transition-all duration-300">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-all duration-300">About</a>
+                <a href="#projects" class="hover:text-pink-400 transition-all duration-300">Projects</a>
+                <a href="#contact" class="hover:text-indigo-400 transition-all duration-300">Contact</a>
+            </div>
+            <p class="text-gray-400">© 2025 Roopraj Interactive Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Initialize Feather Icons
+        feather.replace();
+
+        // Vanta.js Background
+        VANTA.GLOBE({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3b82f6,
+            backgroundColor: 0x111827,
+            size: 1.00
+        });
+
+        // Cursor Trail Effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const cursor = document.getElementById('cursor-trail');
+            const trailElements = [];
+            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#10b981'];
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                // Create trail element
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                trail.style.background = colors[Math.floor(Math.random() * colors.length)];
+                document.body.appendChild(trail);
+                
+                // Remove after animation
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                    setTimeout(() => {
+                        document.body.removeChild(trail);
+                    }, 300);
+                }, 500);
+            });
+            
+            // Interactive elements hover effect
+            const interactiveElements = document.querySelectorAll('a, button, .project-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(3)';
+                    cursor.style.opacity = '0.3';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursor.style.opacity = '0.5';
+                });
+            });
+            
+            // Mobile menu toggle
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                feather.replace();
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+            
+            // Scroll animations
+            gsap.from("nav", {
+                y: -50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+            
+            gsap.from("#home h1", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.5,
+                ease: "power3.out"
+            });
+            
+            gsap.from("#home p", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 0.8,
+                ease: "power3.out"
+            });
+            
+            gsap.from("#home button", {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                delay: 1.1,
+                stagger: 0.2,
+                ease: "power3.out"
+            });
+        });
+    </script>
+</body>
+</html>
